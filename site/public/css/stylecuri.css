@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+
+.curiosidades-cont {
+    background-color: #3e3e3e;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    text-align: center;
+    padding: 180px;
+}
+h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+p {
+    font-size: 1.5rem;
+}
+ /* Estilo para o container */
+ .image-container {
+    display: flex;
+    justify-content: center;
+    gap: 90px; /* Espaçamento entre as imagens */
+}
+
+/* Estilo para as imagens */
+.image-container a img {
+    width: 300px; /* Largura fixa */
+    height: 300px; /* Altura fixa */
+    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
+    border: 2px solid #ccc; /* Borda opcional */
+    border-radius: 8px; /* Bordas arredondadas opcionais */
+    transition: transform 0.3s ease; /* Animação ao passar o mouse */
+}
+
+/* Efeito ao passar o mouse */
+.image-container a img:hover {
+    transform: scale(1.1); /* Aumenta a imagem */
+    border-color: #000; /* Altera a cor da borda */
+}
