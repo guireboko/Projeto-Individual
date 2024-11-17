@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FuteCenter - Login</title>
-    <link rel="stylesheet" href="../public/css/loginCadastro.css">
+    <link rel="stylesheet" href="./css/loginCadastro.css">
 </head>
 <body>
     
@@ -64,7 +64,7 @@
 </body>
 </html>
 
-<script src="../public/js/loginCadastro.js"></script>
+<script src="./js/loginCadastro.js"></script>
 
 <script>
     function cadastrar(){
@@ -245,10 +245,10 @@
                     sessionStorage.userUsuario= json.userName
                     sessionStorage.idUsuario = json.idUsuario
 
-                    window.location = "./spotSouls/spotSouls.html";
+                    window.location = "curiosidades.html"; //MUDAR AQUIIIIIIIIIIIII
                 })
             }else{
-                alert("Erro ao tentar realizar login.")
+                alert(`Verifique a senha e tente novamente!`)
 
                 resposta.text().then(texto => {
                     console.error(texto)
