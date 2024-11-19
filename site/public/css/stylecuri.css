@@ -7,7 +7,10 @@
 
 
 .curiosidades-cont {
-    background-color: #3e3e3e;
+    background-image: url(../assets/imagens/medidas_campo_futebol_field-1024x683.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -22,6 +25,7 @@ h1 {
 
 p {
     font-size: 1.5rem;
+    text-shadow: #000;
 }
  /* Estilo para o container */
  .image-container {
@@ -44,4 +48,28 @@ p {
 .image-container a img:hover {
     transform: scale(1.1); /* Aumenta a imagem */
     border-color: #000; /* Altera a cor da borda */
+}
+.textosCuriosidades{
+    color: #fff; /* Cor do texto */
+    text-shadow: 2px 2px 5px black;
+    text-align: start;
+    font-size: 135%;
+
+}
+.image-brasil img {
+    width: 300px; /* Largura fixa */
+    height: 300px; /* Altura fixa */
+    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
+    /* border: 2px solid #ccc; Borda opcional */
+    border-radius: 0px; /* Bordas arredondadas opcionais */
+    align-items: center;
+    justify-content: center;
+}
+
+.image-brasil{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
 }
