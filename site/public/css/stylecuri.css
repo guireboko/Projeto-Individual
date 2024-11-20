@@ -16,7 +16,8 @@
     flex-direction: column;
     color: #ffffff;
     text-align: center;
-    padding: 180px;
+    padding: 160px;
+    overflow: hidden;
 }
 h1 {
     font-size: 3rem;
@@ -39,8 +40,8 @@ p {
     width: 300px; /* Largura fixa */
     height: 300px; /* Altura fixa */
     object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
-    border: 2px solid #ccc; /* Borda opcional */
-    border-radius: 8px; /* Bordas arredondadas opcionais */
+    border: 2px solid #BEA407; /* Borda opcional */
+    border-radius: 0px; /* Bordas arredondadas opcionais */
     transition: transform 0.3s ease; /* Animação ao passar o mouse */
 }
 
