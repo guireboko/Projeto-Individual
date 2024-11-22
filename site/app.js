@@ -10,6 +10,7 @@ var app = express();
 
 
 var usuarioRouter = require("./src/routes/usuarios");
+var votosRouter = require("./src/routes/votos");    
 
 
 app.use(express.json());
@@ -19,6 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use("/usuarios", usuarioRouter);
+app.use("/votos", votosRouter);
+
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

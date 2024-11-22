@@ -24,8 +24,69 @@
 </head>
 
 <body onload="obterDadosGrafico()">
-    <div class="dash">
-  <div class="janela">
+  <div class="dash">
+    <div class="painel">
+      <div class="titulos">
+        <h1>ATLETA FAVORITO</h1>
+      </div>
+      <div class="jogadores-concorrentes">
+        <div class="jogador" onclick="votar('Vinicius Junior')">
+          <img
+            src="./img-jogadores/vini jr.jpg"
+            alt=""
+            width="200px"
+            height="300px"
+          />
+          <p>Vinicius Junior</p>
+        </div>
+        <div class="jogador" onclick="votar('Lionel Messi')">
+          <img src="./img-jogadores/lionel messi.jpg" 
+          alt="" 
+          width="200px" 
+          height="300px" />
+          <p>Lionel Messi</p>
+        </div>
+        <div class="jogador" onclick="votar('Cristiano Ronaldo')">
+          <img
+            src="./img-jogadores/cristiano ronaldo.jpg"
+            alt=""
+            width="200px"
+            height="300px"
+          />
+          <p>Cristiano Ronaldo</p>
+        </div>
+        <div class="jogador" onclick="votar('Neymar Junior')">
+          <img
+            src="./img-jogadores/neymar jr.jpg"
+            alt=""
+            width="200px"
+            height="300px"
+          />
+          <p>Neymar Junior</p>
+        </div>
+        <div class="jogador" onclick="votar('Kylian Mbappe')">
+          <img 
+          src="./img-jogadores/mbappe.jpg" 
+          alt=""
+          width="200px" 
+          height="300px" 
+          />
+          <p>Kylian Mbappe</p>
+        </div>
+        <div class="jogador" onclick="votar('Antoine Griezmann')">
+          <img
+            src="./img-jogadores/griezmann.webp"
+            alt=""
+            width="200px"
+            height="300px"
+          />
+          <p>Antoine Griezmann</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    <div class="janela">
         <div class="header-left">
             <h1>FuteCenter</h1>
 
@@ -40,6 +101,7 @@
                     <h3>Votação</h3>
                 </a>
             </div>
+           
 
 
             
@@ -47,15 +109,12 @@
             <a class="btn-logout" href="./index.html">LOGOUT</a>
         </div>
         </div>
-        <div class="grafico">
-            <canvas id="myCanvas"></canvas>
-          </div>
 
        
             
         
     </div>  
-</div>
+   
     </body>
 
 
@@ -66,6 +125,7 @@
         let myChart;
 
 function votar(nomeJogador) {
+  window.location = "dashboard.html";
   fetch(`/votos/votar/${nomeJogador}`, {
     method: "POST",
   })
@@ -105,34 +165,33 @@ function obterDadosGrafico() {
 function plotarGrafico(resposta) {
   console.log("iniciando plotagem do gráfico...");
 
- 
+  // Criando estrutura para plotar gráfico - labels
   let labels = [
-    "VINICIUS JUNIOR",
-    "LIONEL MESSI",
-    "CRISTIANO RONALDO",
-    "NEYMAR JUNIOR",
-    "KYLIAN MBAPPE",
-    "ANTOINE GRIEZMANN",
+    "Vinicius Junior",
+    "Lionel Messi",
+    "Cristiano Ronaldo",
+    "Neymar Junior",
+    "Kylian Mbappe",
+    "Antoine Griezmann",
   ];
 
+  // Criando estrutura para plotar gráfico - dados
   let dados = {
     labels: labels,
     datasets: [
       {
         label: "Votos",
-        color: "white",
         data: [],
         fill: false,
         backgroundColor: [
-          "rgb(0,155,58)",
-          "rgb(108, 172, 228)",
-          "rgb(218, 41, 28)",
-          "rgb(0,155,58)",
-          "rgb(0, 38, 84)",
-          "rgb(0, 38, 84)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
         ],
         borderColor: [
-          "black",
+          "rgba(75, 192, 192, 1)",
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
         ],
         borderWidth: 1,
         tension: 0.1,
@@ -175,10 +234,10 @@ function plotarGrafico(resposta) {
       plugins: {
         title: {
           display: true,
-          text: "RESULTADO PARCIAL",
+          text: "VOTAÇÃO",
           color: "#FFFFFF",
           font: {
-            size: 30,
+            size: 20,
           },
         },
         legend: {
