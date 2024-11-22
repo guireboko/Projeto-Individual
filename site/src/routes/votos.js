@@ -11,4 +11,10 @@ router.get("/ultimos", function (req, res) {
   votoController.obterVotosAtualizados(req, res); // invoca a função da controller para "obter os votos atualizados"
 });
 
+router.get("/buscarPorQuantidade", function (req, res) {
+  votoController.buscarVotosQuantidade(req, res); // invoca a função da controller para "obter os votos atualizados"
+});
+
+
+
 module.exports = router;

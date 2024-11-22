@@ -41,7 +41,6 @@ p {
     height: 300px; /* Altura fixa */
     object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
     border: 2px solid #BEA407; /* Borda opcional */
-    border-radius: 0px; /* Bordas arredondadas opcionais */
     transition: transform 0.3s ease; /* Animação ao passar o mouse */
 }
 

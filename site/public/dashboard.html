@@ -2,231 +2,264 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FuteCenter | Votação</title>
-
-    
-    <link rel="stylesheet" href="./css/dashboards.css">
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/grafico.css">
-    <script src="../js/sessao.js"></script>
+  <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FuteCenter | Votação</title>
 
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="./css/dashboards.css">
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/grafico.css">
+  <script src="../js/sessao.js"></script>
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
-<body onload="obterDadosGrafico()">
-    <div class="dash">
-  <div class="janela">
-        <div class="header-left">
-            <h1>FuteCenter</h1>
+<body onload="obterDadosGrafico(); obterDadosKPI()">
+  <div class="dash">
+    <div class="janela">
+      <div class="header-left">
+        <h1>FuteCenter</h1>
 
-            <div class="hello">
-                <h3>Bem vindo(a),<span id="b_usuario">usuário</span>! <br>
-                    Vote em seu jogador favorito!</h3>
-                
-            </div>
+        <div class="hello">
+          <h3>Bem vindo(a),<span id="b_usuario">usuário</span>! <br>
+            <br>
+            Vote em seu jogador favorito!</h3>
 
-            <div class="btn-nav-white">
-                <a href="./votacao.html">
-                    <h3>Votação</h3>
-                </a>
-            </div>
-
-
-            
-            <div class="btn-logout">
-            <a class="btn-logout" href="./index.html">LOGOUT</a>
         </div>
+
+        <div class="btn-nav-white">
+          <a href="./votacao.html">
+            <h3>Votação</h3>
+          </a>
         </div>
+
+
+
+        <div class="btn-logout">
+          <a class="btn-logout" href="./index.html">LOGOUT</a>
+        </div>
+      </div>
+      <div class="div-dashboard">
         <div class="grafico">
-            <canvas id="myCanvas"></canvas>
+          <canvas id="myCanvas"></canvas>
+        </div>
+        <div class="div-kpis">
+          <div class="div-kpi">
+            <span>Jogador Mais Votado:</span>
+            <span id="span_jogadorMais"></span>
           </div>
-
-       
-            
-        
-    </div>  
-</div>
-    </body>
-
-
-    <script>
-        b_usuario.innerHTML = sessionStorage.userUsuario;
+          <div class="div-kpi">
+            <span>Jogador Menos Votado:</span>
+            <span id="span_jogadorMenos"></span>
+          </div>
+        </div>
+      </div>
 
 
-        let myChart;
 
-function votar(nomeJogador) {
-  fetch(`/votos/votar/${nomeJogador}`, {
-    method: "POST",
-  })
-    .then((response) => {
-      if (response.ok) {
-        console.log(`Voto contabilizado`);
-        atualizarGrafico();
-      } else {
-        console.error("Erro na votação ou jogador não encontrado");
-      }
+
+    </div>
+  </div>
+</body>
+
+
+<script>
+  b_usuario.innerHTML = sessionStorage.userUsuario;
+
+
+  let myChart;
+
+  function votar(nomeJogador) {
+    fetch(`/votos/votar/${nomeJogador}`, {
+      method: "POST",
     })
-    .catch(function (error) {
-      console.error(`Erro ao realizar o voto: ${error.message}`);
-    });
-}
-
-function obterDadosGrafico() {
-  fetch(`/votos/ultimos`, { cache: "no-store" })
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-          plotarGrafico(resposta);
-        });
-      } else {
-        console.error("Nenhum dado encontrado ou erro na API");
-      }
-    })
-    .catch(function (error) {
-      console.error(
-        `Erro na obtenção dos dados p/ gráfico: ${error.message}`
-      );
-    });
-}
-
-function plotarGrafico(resposta) {
-  console.log("iniciando plotagem do gráfico...");
-
- 
-  let labels = [
-    "VINICIUS JUNIOR",
-    "LIONEL MESSI",
-    "CRISTIANO RONALDO",
-    "NEYMAR JUNIOR",
-    "KYLIAN MBAPPE",
-    "ANTOINE GRIEZMANN",
-  ];
-
-  let dados = {
-    labels: labels,
-    datasets: [
-      {
-        label: "Votos",
-        color: "white",
-        data: [],
-        fill: false,
-        backgroundColor: [
-          "rgb(0,155,58)",
-          "rgb(108, 172, 228)",
-          "rgb(218, 41, 28)",
-          "rgb(0,155,58)",
-          "rgb(0, 38, 84)",
-          "rgb(0, 38, 84)",
-        ],
-        borderColor: [
-          "black",
-        ],
-        borderWidth: 1,
-        tension: 0.1,
-      },
-    ],
-  };
-
-  console.log("----------------------------------------------");
-  console.log(
-    'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
-  );
-  console.log(resposta);
-
-  // Inserindo valores recebidos em estrutura para plotar o gráfico
-
-  for (i = 0; i < resposta.length; i++) {
-    var registro = resposta[i];
-    dados.datasets[0].data.push(registro.quantidade);
+      .then((response) => {
+        if (response.ok) {
+          console.log(`Voto contabilizado`);
+          atualizarGrafico();
+        } else {
+          console.error("Erro na votação ou jogador não encontrado");
+        }
+      })
+      .catch(function (error) {
+        console.error(`Erro ao realizar o voto: ${error.message}`);
+      });
   }
 
-  console.log("----------------------------------------------");
-  console.log("O gráfico será plotado com os respectivos valores:");
-  console.log("Labels:");
-  console.log(labels);
-  console.log("Dados:");
-  console.log(dados.datasets);
-  console.log("----------------------------------------------");
+  function obterDadosGrafico() {
+    fetch(`/votos/ultimos`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-  // Criando estrutura para plotar gráfico - config
-  const config = {
-    type: "bar",
-    data: dados,
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
+            plotarGrafico(resposta);
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+
+  function obterDadosKPI() {
+    fetch(`/votos/buscarPorQuantidade`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+            span_jogadorMais.innerHTML = resposta[0].maisVotado;
+            span_jogadorMenos.innerHTML = resposta[0].menosVotado;
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+
+  function plotarGrafico(resposta) {
+    console.log("iniciando plotagem do gráfico...");
+
+
+    let labels = [
+      "VINICIUS JUNIOR",
+      "LIONEL MESSI",
+      "CRISTIANO RONALDO",
+      "NEYMAR JUNIOR",
+      "KYLIAN MBAPPE",
+      "ANTOINE GRIEZMANN",
+    ];
+
+    let dados = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Votos",
+          color: "white",
+          data: [],
+          fill: false,
+          backgroundColor: [
+            "rgb(0,155,58)",
+            "rgb(108, 172, 228)",
+            "rgb(218, 41, 28)",
+            "rgb(0,155,58)",
+            "rgb(0, 38, 84)",
+            "rgb(0, 38, 84)",
+          ],
+          borderColor: [
+            "black",
+          ],
+          borderWidth: 1,
+          tension: 0.1,
         },
-      },
-      plugins: {
-        title: {
-          display: true,
-          text: "RESULTADO PARCIAL",
-          color: "#FFFFFF",
-          font: {
-            size: 30,
+      ],
+    };
+
+    console.log("----------------------------------------------");
+    console.log(
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+
+    for (i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      dados.datasets[0].data.push(registro.quantidade);
+    }
+
+    console.log("----------------------------------------------");
+    console.log("O gráfico será plotado com os respectivos valores:");
+    console.log("Labels:");
+    console.log(labels);
+    console.log("Dados:");
+    console.log(dados.datasets);
+    console.log("----------------------------------------------");
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: "bar",
+      data: dados,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
           },
         },
-        legend: {
-          display: true,
-          labels: {
-            color: "white",
+        plugins: {
+          title: {
+            display: true,
+            text: "RESULTADO PARCIAL!",
+            color: "#FFFFFF",
+            font: {
+              size: 30,
+            },
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: "white",
+            },
           },
         },
       },
-    },
-  };
+    };
 
-  // Adicionando gráfico criado em div na tela
-  myChart = new Chart(document.getElementById("myCanvas"), config);
-}
+    // Adicionando gráfico criado em div na tela
+    myChart = new Chart(document.getElementById("myCanvas"), config);
+  }
 
-function atualizarGrafico() {
-  fetch(`/votos/ultimos`, { cache: "no-store" })
-    .then(function (resposta) {
-      if (resposta.ok) {
-        resposta.json().then(function (respostaJSON) {
-          console.log(`Dados recebidos: ${JSON.stringify(respostaJSON)}`);
-          console.log(`Dados atuais do gráfico:`);
-          console.log(myChart.data);
+  function atualizarGrafico() {
+    fetch(`/votos/ultimos`, { cache: "no-store" })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then(function (respostaJSON) {
+            console.log(`Dados recebidos: ${JSON.stringify(respostaJSON)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(myChart.data);
 
-          myChart.data.datasets[0].data = [];
+            myChart.data.datasets[0].data = [];
 
-          for (let i = 0; i < respostaJSON.length; i++) {
-            myChart.data.datasets[0].data.push(respostaJSON[i].quantidade);
-          }
-        
-          myChart.update();
-        });
-      } else {
-        console.error("Nenhum dado encontrado ou erro na API");
-      }
-    })
-    .catch(function (error) {
-      console.error(
-        `Erro na obtenção dos dados p/ gráfico: ${error.message}`
-      );
-    });
-}
+            for (let i = 0; i < respostaJSON.length; i++) {
+              myChart.data.datasets[0].data.push(respostaJSON[i].quantidade);
+            }
 
-    </script>
+            myChart.update();
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+
+</script>
 
 
-    </body>
+</body>
+
 </html>
-
-
