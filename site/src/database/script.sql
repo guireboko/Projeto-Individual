@@ -1,6 +1,5 @@
-Create database projetoindividual;
-Use projetoindividual;
-
+create database projetoindividual;
+use projetoIndividual;
 Create Table usuario(
 idUsuario int primary key auto_increment,
 userName varchar(45),
@@ -15,14 +14,23 @@ constraint foreign key (fkUsuario) references usuario(idUsuario),
 constraint primary key (idSenha, fkUsuario)
 );
 
-select usuario.*, senhaUsuario.* from usuario join senhaUsuario on idUsuario = fkUsuario where senha = 'asd' and userName = 'asd';
-CREATE TABLE jogador (
+select usuario.*, senhaUsuario.* from usuario join senhaUsuario on idUsuario = fkUsuario;
+
+CREATE TABLE projetoindividual.votos (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     atleta VARCHAR(50) NOT NULL,
     quantidade INT NOT NULL DEFAULT 0 
 );
 
-INSERT INTO jogador (atleta) VALUES 
+SELECT * FROM projetoindividual.votos;
+
+SELECT
+	(SELECT votos.atleta FROM votos
+		WHERE (SELECT MAX(quantidade) FROM votos) = quantidade) AS maisVotado,
+	(SELECT votos.atleta FROM votos
+		WHERE (SELECT MIN(quantidade) FROM votos) = quantidade) AS menosVotado;
+
+INSERT INTO projetoindividual.votos (atleta) VALUES 
 ('Vinicius Junior'),
 ('Lionel Messi'),
 ('Cristiano Ronaldo'),
@@ -30,4 +38,4 @@ INSERT INTO jogador (atleta) VALUES
 ('Kylian Mbappe'),
 ('Antoine Griezmann');
 
-SELECT * FROM jogador;
+
