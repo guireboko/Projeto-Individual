@@ -15,13 +15,16 @@
     display: flex;
     flex-direction: column;
     color: #ffffff;
-    text-align: center;
     padding: 160px;
     overflow: hidden;
 }
 h1 {
     font-size: 3rem;
     text-align: center;
+}
+h2{
+    text-align: start;
+    color: #BEA407;
 }
 
 p {
@@ -72,4 +75,21 @@ p {
     justify-content: center;
     flex-direction: column;
     
+}
+.buttonvoltar{
+    display: flex;
+    font-family: 'VALORANT', sans-serif;
+    align-items: end;
+    justify-content: end;
+    margin-left: 1300px;
+}
+
+.textoganhadores{
+    color: #fff; /* Cor do texto */
+    text-shadow: 2px 2px 5px black;
+    text-align: start;
+    align-items: start;
+    justify-content: start;
+    text-align: start;
+    font-size: 135%;
 }

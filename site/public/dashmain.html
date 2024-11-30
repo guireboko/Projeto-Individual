@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FuteCenter</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/stylecuri.css">
+  <link rel="stylesheet" href="./css/grafico.css">
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body onload="obterDadosGrafico(); obterDadosKPI()">
+    <header class="cabecalho">
+		<img class="logo" src="./assets/imagens/rb_4383.png" alt="Logo">
+		<nav> 
+            <a href="./index.html">Início</a>
+            <a href="./curiosidades.html">Curiosidades</a>
+            <a href="./ganhadores.html">Histórico</a>
+            <a href="./dashmain.html">Dashboard</a>
+            <a href="./loginCadastro.html">Votação</a>
+      <div class="iconelogin">
+        <a  href="./loginCadastro.html">Login</a>
+              </div>
+		</nav>
+	</header>
+    <main>
+     
+        <div class="curiosidades-cont"> 
+                 <div class="div-dashboard">
+        <div class="grafico">
+                          <canvas height="800" width="1400" id="myCanvas"></canvas>
+                        </div>
+                        <div class="div-kpis">
+                          <div class="div-kpi">
+                            <span>Vencedor Parcial:</span>
+                            <span style="color:green" id="span_jogadorMais"></span>
+                          </div>
+                          <div class="div-kpi">
+                            <span>Último colocado:</span>
+                            <span style="color:red" id="span_jogadorMenos"></span>
+                          </div>
+                        </div>
+                      </div>
+           </p>
+        </div> 
+    </div>
+  <footer>
+    <span> &copy; 2024 FuteCenter inc. </span>
+	</footer>
+
+  </body>
+</html>
+<script>
+  
+  
+    let myChart;
+  
+    function obterDadosGrafico() {
+      fetch(`/votos/ultimos`, { cache: "no-store" })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (resposta) {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+  
+              plotarGrafico(resposta);
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+          }
+        })
+        .catch(function (error) {
+          console.error(
+            `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+          );
+        });
+    }
+  
+    function obterDadosKPI() {
+      fetch(`/votos/buscarPorQuantidade`, { cache: "no-store" })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (resposta) {
+              console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+  
+              span_jogadorMais.innerHTML = resposta[0].maisVotado;
+              span_jogadorMenos.innerHTML = resposta[0].menosVotado;
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+          }
+        })
+        .catch(function (error) {
+          console.error(
+            `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+          );
+        });
+    }
+  
+    function plotarGrafico(resposta) {
+      console.log("iniciando plotagem do gráfico...");
+  
+  
+      let labels = [
+        "VINICIUS JUNIOR",
+        "LIONEL MESSI",
+        "CRISTIANO RONALDO",
+        "NEYMAR JUNIOR",
+        "KYLIAN MBAPPE",
+        "ANTOINE GRIEZMANN",
+      ];
+  
+      let dados = {
+        labels: labels,
+        datasets: [
+          {
+            label: "Votos",
+            color: "white",
+            data: [],
+            fill: false,
+            backgroundColor: [
+              "rgb(0,155,58)",
+              "rgb(108, 172, 228)",
+              "rgb(218, 41, 28)",
+              "rgb(0,155,58)",
+              "rgb(0, 38, 84)",
+              "rgb(0, 38, 84)",
+            ],
+            borderColor: [
+              "black",
+            ],
+            borderWidth: 1,
+            tension: 0.1,
+          },
+        ],
+      };
+  
+      console.log("----------------------------------------------");
+      console.log(
+        'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+      );
+      console.log(resposta);
+  
+      // Inserindo valores recebidos em estrutura para plotar o gráfico
+  
+      for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.datasets[0].data.push(registro.quantidade);
+      }
+  
+      console.log("----------------------------------------------");
+      console.log("O gráfico será plotado com os respectivos valores:");
+      console.log("Labels:");
+      console.log(labels);
+      console.log("Dados:");
+      console.log(dados.datasets);
+      console.log("----------------------------------------------");
+  
+      // Criando estrutura para plotar gráfico - config
+      const config = {
+        type: "bar",
+        data: dados,
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              ticks: {
+            color: "white", // Cor dos números do eixo Y
+          },
+              beginAtZero: true,
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: "RESULTADO PARCIAL VOTAÇÃO MELHOR DO MUNDO:",
+              color: "#BEA407",
+              font: {
+                size: 30,
+              },
+            },
+            legend: {
+              display: true,
+              labels: {
+                color: "white",
+              },
+            },
+          },
+        },
+      };
+  
+      
+      myChart = new Chart(document.getElementById("myCanvas"), config);
+    }
+  
+    function atualizarGrafico() {
+      fetch(`/votos/ultimos`, { cache: "no-store" })
+        .then(function (resposta) {
+          if (resposta.ok) {
+            resposta.json().then(function (respostaJSON) {
+              console.log(`Dados recebidos: ${JSON.stringify(respostaJSON)}`);
+              console.log(`Dados atuais do gráfico:`);
+              console.log(myChart.data);
+  
+              myChart.data.datasets[0].data = [];
+  
+              for (let i = 0; i < respostaJSON.length; i++) {
+                myChart.data.datasets[0].data.push(respostaJSON[i].quantidade);
+              }
+  
+              myChart.update();
+            });
+          } else {
+            console.error("Nenhum dado encontrado ou erro na API");
+          }
+        })
+        .catch(function (error) {
+          console.error(
+            `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+          );
+        });
+    }
+  
+  </script>
+  
+  
+  </body>
+  
+  </html>

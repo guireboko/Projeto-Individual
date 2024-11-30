@@ -55,11 +55,11 @@
         <div class="div-kpis">
           <div class="div-kpi">
             <span>Jogador Mais Votado:</span>
-            <span id="span_jogadorMais"></span>
+            <span style="color:green" id="span_jogadorMais"></span>
           </div>
           <div class="div-kpi">
             <span>Jogador Menos Votado:</span>
-            <span id="span_jogadorMenos"></span>
+            <span style="color:red" id="span_jogadorMenos"></span>
           </div>
         </div>
       </div>
@@ -202,7 +202,10 @@
       options: {
         responsive: true,
         scales: {
-          y: {
+          x: {
+            ticks: {
+          color: "white", // Cor dos números do eixo Y
+        },
             beginAtZero: true,
           },
         },
@@ -210,7 +213,7 @@
           title: {
             display: true,
             text: "RESULTADO PARCIAL VOTAÇÃO MELHOR DO MUNDO:",
-            color: "#FFFFFF",
+            color: "#BEA407",
             font: {
               size: 30,
             },
@@ -225,7 +228,7 @@
       },
     };
 
-    // Adicionando gráfico criado em div na tela
+    
     myChart = new Chart(document.getElementById("myCanvas"), config);
   }
 

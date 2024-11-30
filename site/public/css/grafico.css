@@ -83,3 +83,22 @@
     padding: 10px;
     
  }
+ .div-kpis {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+ }
+ 
+ .div-kpi {
+   display: flex;
+   flex-direction: column;
+   color: white;
+   width: 40%;
+   background: radial-gradient(113.55% 67.86% at 50.26% 50%, rgba(190, 122, 76, 0) 0%, rgba(190, 164, 7, 0.31) 100%);
+   border: 3px solid #BEA407;
+   border-radius: 5px;
+   text-align: center;
+   padding: 2% 5%; 
+   font-family: "Oswald", sans-serif;
+ }
+ 

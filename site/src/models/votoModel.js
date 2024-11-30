@@ -22,9 +22,9 @@ function buscarVotosQuantidade() {
   var instrucaoSql = `
   SELECT
 	(SELECT votos.atleta FROM votos
-		WHERE (SELECT MAX(quantidade) FROM votos) = quantidade) AS maisVotado,
+		WHERE (SELECT MAX(quantidade) FROM votos) = quantidade LIMIT 1) AS maisVotado,
 	(SELECT votos.atleta FROM votos
-		WHERE (SELECT MIN(quantidade) FROM votos) = quantidade) AS menosVotado;`;
+		WHERE (SELECT MIN(quantidade) FROM votos) = quantidade LIMIT 1) AS menosVotado;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);  
