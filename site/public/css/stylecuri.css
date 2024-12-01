@@ -93,3 +93,18 @@ p {
     text-align: start;
     font-size: 135%;
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+table, th, td {
+    border: 1px solid #BEA407;
+}
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+th {
+    background-color: #000000;
+}
