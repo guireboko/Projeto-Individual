@@ -80,7 +80,6 @@ b {
         font-family: "Oswald", sans-serif;
         font-size: 4.5rem;
         text-align: center;
-        /* padding: 15px; */
     }
     
     span{
@@ -148,11 +147,8 @@ b {
     
     .buttonIndex{
         cursor: pointer;
-        /* border: 1px solid white; */
         border-radius: 2px;
         font-size: 1.2rem !important;
-        /* color: rgb(255, 255, 255);
-        background-color: transparent; */
         background: radial-gradient(113.55% 67.86% at 50.26% 50%, rgba(190, 122, 76, 0) 0%, rgba(190, 164, 7, 0.31) 100%);
         border: 1px solid #BEA407;
         width: 30%;

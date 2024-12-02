@@ -146,7 +146,7 @@
       );
       console.log(resposta);
   
-      // Inserindo valores recebidos em estrutura para plotar o gráfico
+      
   
       for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
@@ -160,8 +160,7 @@
       console.log("Dados:");
       console.log(dados.datasets);
       console.log("----------------------------------------------");
-  
-      // Criando estrutura para plotar gráfico - config
+ 
       const config = {
         type: "bar",
         data: dados,
@@ -170,7 +169,7 @@
           scales: {
             x: {
               ticks: {
-            color: "white", // Cor dos números do eixo Y
+            color: "white", 
           },
               beginAtZero: true,
             },

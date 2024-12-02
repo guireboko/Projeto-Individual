@@ -38,7 +38,7 @@ function login(req, res) {
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+                    console.log(`Resultados: ${JSON.stringify(resultado)}`); 
 
                     if (resultado.length == 1) {
                         console.log(resultado);
@@ -61,19 +61,16 @@ function login(req, res) {
 }
 
 function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var usuario = req.body.usuarioServer;
+   var usuario = req.body.usuarioServer;
     var email = req.body.emailServer;
 
-
-    // Faça as validações dos valores
     if (usuario == undefined) {
         res.status(400).send("Seu nome está indefinido.");
     } else if (email == undefined) {
         res.status(400).send("Seu email está indefinido.");
     } else {
         
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+     
         usuarioModel.cadastrar(usuario, email)
             .then(
                 function (resultado) {

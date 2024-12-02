@@ -148,21 +148,7 @@ canvas {
   padding: 0;
 }
 
-/* .btn-logout {
-  margin: 0;
-  padding: 0;
-  width: 20%;
-  background-color:#BEA407;
-  color: white;
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px 15px;
-  margin-bottom: 100px;
-  cursor: pointer;
-  align-items: center;
-}
-a{
-  align-items: start; */
+
   .btn-logout {
     background: radial-gradient(113.55% 67.86% at 50.26% 50%, rgba(190, 122, 76, 0) 0%, rgba(190, 164, 7, 0.31) 100%);
     border: 1px solid #BEA407;
@@ -177,9 +163,6 @@ a{
     width: 12rem;
     height: 2.5rem;
   }
-
-
-/*-------------KPIS -------------------------*/
 
 .div-dashboard {
   display: flex;

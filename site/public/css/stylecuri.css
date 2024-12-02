@@ -31,40 +31,37 @@ p {
     font-size: 1.5rem;
     text-shadow: #000;
 }
- /* Estilo para o container */
+ 
  .image-container {
     display: flex;
     justify-content: center;
-    gap: 90px; /* Espaçamento entre as imagens */
+    gap: 90px; 
 }
 
-/* Estilo para as imagens */
 .image-container a img {
-    width: 300px; /* Largura fixa */
-    height: 300px; /* Altura fixa */
-    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
-    border: 2px solid #BEA407; /* Borda opcional */
-    transition: transform 0.3s ease; /* Animação ao passar o mouse */
+    width: 300px; 
+    height: 300px; 
+    object-fit: cover; 
+    border: 2px solid #BEA407; 
+    transition: transform 0.3s ease;
 }
 
-/* Efeito ao passar o mouse */
 .image-container a img:hover {
-    transform: scale(1.1); /* Aumenta a imagem */
-    border-color: #000; /* Altera a cor da borda */
+    transform: scale(1.1); 
+    border-color: #000; 
 }
 .textosCuriosidades{
-    color: #fff; /* Cor do texto */
+    color: #fff; 
     text-shadow: 2px 2px 5px black;
     text-align: start;
     font-size: 135%;
 
 }
 .image-brasil img {
-    width: 300px; /* Largura fixa */
-    height: 300px; /* Altura fixa */
-    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
-    /* border: 2px solid #ccc; Borda opcional */
-    border-radius: 0px; /* Bordas arredondadas opcionais */
+    width: 300px;
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 0px;
     align-items: center;
     justify-content: center;
 }
@@ -85,7 +82,7 @@ p {
 }
 
 .textoganhadores{
-    color: #fff; /* Cor do texto */
+    color: #fff; 
     text-shadow: 2px 2px 5px black;
     text-align: start;
     align-items: start;

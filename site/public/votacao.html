@@ -165,7 +165,7 @@ function obterDadosGrafico() {
 function plotarGrafico(resposta) {
   console.log("iniciando plotagem do gráfico...");
 
-  // Criando estrutura para plotar gráfico - labels
+ 
   let labels = [
     "Vinicius Junior",
     "Lionel Messi",
@@ -175,7 +175,7 @@ function plotarGrafico(resposta) {
     "Antoine Griezmann",
   ];
 
-  // Criando estrutura para plotar gráfico - dados
+  
   let dados = {
     labels: labels,
     datasets: [
@@ -205,7 +205,7 @@ function plotarGrafico(resposta) {
   );
   console.log(resposta);
 
-  // Inserindo valores recebidos em estrutura para plotar o gráfico
+ 
 
   for (i = 0; i < resposta.length; i++) {
     var registro = resposta[i];
@@ -220,7 +220,7 @@ function plotarGrafico(resposta) {
   console.log(dados.datasets);
   console.log("----------------------------------------------");
 
-  // Criando estrutura para plotar gráfico - config
+ 
   const config = {
     type: "bar",
     data: dados,
@@ -250,7 +250,7 @@ function plotarGrafico(resposta) {
     },
   };
 
-  // Adicionando gráfico criado em div na tela
+  
   myChart = new Chart(document.getElementById("myCanvas"), config);
 }
 

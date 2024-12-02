@@ -21,8 +21,6 @@ router.get("/cadastrarSenhaUsuario/:idUsuario/:senhaUsuario", function (req, res
 });
 
 
-
-//Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
 router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })

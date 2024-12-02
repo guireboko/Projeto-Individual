@@ -26,16 +26,16 @@ SELECT * FROM projetoindividual.votos;
 
 SELECT
 	(SELECT votos.atleta FROM votos
-		WHERE (SELECT MAX(quantidade) FROM votos) = quantidade) AS maisVotado,
+		WHERE (SELECT MAX(quantidade) FROM votos) = quantidade LIMIT 1) AS maisVotado,
 	(SELECT votos.atleta FROM votos
-		WHERE (SELECT MIN(quantidade) FROM votos) = quantidade) AS menosVotado;
-
+		WHERE (SELECT MIN(quantidade) FROM votos) = quantidade LIMIT 1) AS menosVotado;
+        
 INSERT INTO projetoindividual.votos (atleta) VALUES 
 ('Vinicius Junior'),
 ('Lionel Messi'),
 ('Cristiano Ronaldo'),
 ('Neymar Junior'),
 ('Kylian Mbappe'),
-('Antoine Griezmann');
+('Antoine Griezmann'); 
 
 

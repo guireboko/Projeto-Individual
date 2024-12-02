@@ -19,11 +19,10 @@ function login(usuario, senha) {
     return database.executar(instrucao);
 }
 
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucao
+
 function cadastrar(usuario, email) {
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
+   
     var instrucao = `
         INSERT INTO usuario (userName, email) VALUES ('${usuario}', '${email}');
     `;
